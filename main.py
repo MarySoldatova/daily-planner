@@ -5,6 +5,7 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
+from database import init_db, add_task, get_tasks, delete_task
 
 class TaskApp(App):
     def build(self):
