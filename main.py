@@ -62,8 +62,8 @@ class TaskApp(App):
         self.tasks_layout.add_widget(task_box)
 
 
-    def remove_task(self, task_label):
-        # Удаление задачи из списка
+    def remove_task(self, task_id, task_label):
+        delete_task(task_id)
         self.tasks_layout.remove_widget(task_label.parent)
 
 if __name__ == "__main__":
