@@ -40,16 +40,10 @@ class TaskApp(App):
         # Добавление задачи в список
         task_text = self.task_input.text
         if task_text:
-            task_label = Label(text=task_text, size_hint_y=None, height=40)
-            delete_button = Button(text="Удалить", size_hint_y=None, height=40)
-            delete_button.bind(on_press=lambda btn: self.remove_task(task_label))
+            task_id = add_task(task_text) # сохраняем задачу в базе данных
+            self.add_task_to_layot(task_id, task_text)
+            self.task_input.text = '' # очистка поля ввода
 
-            task_box = BoxLayout(orientation='horizontal', size_hint_y=None, height=40)
-            task_box.add_widget(task_label)
-            task_box.add_widget(delete_button)
-
-            self.tasks_layout.add_widget(task_box)
-            self.task_input.text = ""  # Очистка поля ввода
 
     def remove_task(self, task_label):
         # Удаление задачи из списка
