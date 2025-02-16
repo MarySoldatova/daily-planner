@@ -20,6 +20,14 @@ def add_task(task):
     conn.close()
     return tasks
 
+def get_tasks():
+    conn = sqlite3.connect('tasks.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM tasks')
+    tasks = cursor.fetchall()
+    conn.close()
+    return tasks
+
 def delete_task(task_id):
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
