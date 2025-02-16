@@ -8,6 +8,13 @@ from kivy.uix.gridlayout import GridLayout
 from database import init_db, add_task, get_tasks, delete_task
 
 class TaskApp(App):
+    def __init__(self, **kwargs):
+        super(TaskApp, self).__init__(**kwargs)
+
+        self.layout = None
+        self.task_input = None
+        self.tasks_layout = None
+
     def build(self):
         init_db() # инициализация базы данных
         # Основной макет
@@ -42,12 +49,12 @@ class TaskApp(App):
             task_id, task_text = task
             self.add_task_to_layout(task_id, task_text)
 
-    def add_task(self, instance):
+    def add_task(self):
         # Добавление задачи в список
         task_text = self.task_input.text
         if task_text:
             task_id = add_task(task_text) # сохраняем задачу в базе данных
-            self.add_task_to_layot(task_id, task_text)
+            self.add_task_to_layout(task_id, task_text)
             self.task_input.text = '' # очистка поля ввода
 
     def add_task_to_layout(self, task_id, task_text):
