@@ -49,7 +49,7 @@ class TaskApp(App):
             task_id, task_text = task
             self.add_task_to_layout(task_id, task_text)
 
-    def add_task(self):
+    def add_task(self, instance):
         # Добавление задачи в список
         task_text = self.task_input.text
         if task_text:

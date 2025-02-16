@@ -12,13 +12,13 @@ def init_db():
     conn.commit()
     conn.close()
 
-def add_task(task):
+def add_task(task_text):
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM tasks')
-    tasks = cursor.fetchall()
+    cursor.execute('INSERT INTO tasks (task_text) VALUES (?)', (task_text,))
+    conn.commit()
     conn.close()
-    return tasks
+
 
 def get_tasks():
     conn = sqlite3.connect('tasks.db')
@@ -31,7 +31,7 @@ def get_tasks():
 def delete_task(task_id):
     conn = sqlite3.connect('tasks.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM tasks WHERE id = ?', (task_id,))
+    cursor.execute('DELETE FROM tasks WHERE id = ?', (task_id,))
     conn.commit()
     conn.close()
 
