@@ -9,6 +9,7 @@ from database import init_db, add_task, get_tasks, delete_task
 
 class TaskApp(App):
     def build(self):
+        init_db() # инициализация базы данных
         # Основной макет
         self.layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
 
@@ -29,6 +30,9 @@ class TaskApp(App):
         scroll_view = ScrollView(size_hint=(1, None), size=(self.layout.width, 300))
         scroll_view.add_widget(self.tasks_layout)
         self.layout.add_widget(scroll_view)
+
+        # загрузка задач из базы данных
+        self.load_tasks()
 
         return self.layout
 
