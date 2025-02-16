@@ -6,6 +6,14 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from database import init_db, add_task, get_tasks, delete_task
+from plyer import notification
+
+def show_notification(title, message):
+    notification.notify(
+        title=title,
+        message=message,
+        timeout=10  # Время отображения уведомления (в секундах)
+    )
 
 class TaskApp(App):
     def __init__(self, **kwargs):
@@ -50,12 +58,12 @@ class TaskApp(App):
             self.add_task_to_layout(task_id, task_text)
 
     def add_task(self, instance):
-        # Добавление задачи в список
         task_text = self.task_input.text
         if task_text:
-            task_id = add_task(task_text) # сохраняем задачу в базе данных
+            task_id = add_task(task_text)
             self.add_task_to_layout(task_id, task_text)
-            self.task_input.text = '' # очистка поля ввода
+            self.task_input.text = ""
+            show_notification("Задача добавлена", f"Задача: {task_text}")
 
     def add_task_to_layout(self, task_id, task_text):
         task_label = Label(text=task_text, size_hint_y=None, height=40)
